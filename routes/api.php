@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\PostController;
+use App\Http\Controllers\TestQueueEmails;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,10 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('login','login');
     Route::post('register','register');
 });
+
+Route::resource('post', PostController::class);
+Route::get('queue', [TestQueueEmails::class,'sendTestEmails']);
+
 Route::get('/test', function() {
     return Auth::user();
 });
